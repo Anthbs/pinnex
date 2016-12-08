@@ -1,1 +1,3 @@
-"# pinnex" 
+# Pinnex #
+
+## A Poloniex PingPong Bot ##
