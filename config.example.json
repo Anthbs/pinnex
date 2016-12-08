@@ -1,0 +1,12 @@
+{
+	"api_key": "poloniex_api_key_here",
+	"api_secret": "poloniex_secret_here",
+	"debug": true,
+	"currencies": { 
+		"from": "USDT",
+		"to": "BTC",
+		"buy_at": 768,
+		"sell_at": 774,
+		"amount": 10
+	}
+}
