@@ -1,4 +1,6 @@
-var config = require('./config.json');
+var args = process.argv.slice(2);
+var config_file = args.length > 0 ? args[0] : './configs/config.json';
+var config = require(config_file);
 var display = require('./graphics.js');
 var Poloniex = require('poloniex.js');
 var poloniex = new Poloniex(config.api_key, config.api_secret);
@@ -28,7 +30,7 @@ function getCurrentPrice(cb) {
 
 function getPreviousPrices(cb) {
 	var now = parseInt((new Date().getTime() / 1000).toFixed(0))
-	var before = parseInt((new Date(new Date() - (1000 * 60 * 60)).getTime() / 1000).toFixed(0))
+	var before = parseInt((new Date(new Date() - (1000 * 60 * 180)).getTime() / 1000).toFixed(0))
 	poloniex.returnChartData(config.currencies.from, config.currencies.to, 300, before, now, function(err, data) {
 	    if (err){
 	        display.log(err.toString());
@@ -136,21 +138,21 @@ function tick() {
 		var price_data = [
 			{ 
 				x: prices.map(function(p, i) { return i.toString(); }), 
-				y: prices.map(function(p) { return p.price; }),
+				y: prices.map(function(p) { return p.price * config.currencies.multiplier; }),
 				style: {
 	              	line: 'yellow'
              	}
 			},
 			{ 
 				x: prices.map(function(p, i) { return i.toString(); }), 
-				y: prices.map(function(p) { return config.currencies.sell_at; }),
+				y: prices.map(function(p) { return config.currencies.sell_at * config.currencies.multiplier; }),
 				style: {
 	              	line: 'red'
              	}
 			},
 			{ 
 				x: prices.map(function(p, i) { return i.toString(); }), 
-				y: prices.map(function(p) { return config.currencies.buy_at; }),
+				y: prices.map(function(p) { return config.currencies.buy_at * config.currencies.multiplier; }),
 				style: {
 	              	line: 'red'
              	}

@@ -1,20 +1,25 @@
-var config = require('./config.json');
+var args = process.argv.slice(2);
+var config_file = args.length > 0 ? args[0] : './configs/config.json';
+var config = require(config_file);
 var blessed = require('blessed');
 var contrib = require('blessed-contrib');
 var screen = blessed.screen();
 var grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
 
 var line = grid.set(0, 0, 12, 8, contrib.line, { 
+  width: 80, 
+  height: 30,
+  numYLabels: 10,
   style: { 
     line: "yellow", 
     text: "green", 
     baseline: "black"
   }, 
-  xLabelPadding: 3, 
+  xLabelPadding: 2, 
   xPadding: 5, 
   label: 'Price',
-  minY: config.currencies.buy_at - 3,
-  maxY: config.currencies.sell_at + 3
+  minY: (config.currencies.buy_at - (config.currencies.buy_at * 0.01)) * config.currencies.multiplier,
+  maxY: (config.currencies.sell_at + (config.currencies.sell_at * 0.01)) * config.currencies.multiplier
 });
 
 var logger = grid.set(0, 8, 8, 4, contrib.log, { 
