@@ -1,0 +1,1 @@
+node index.js ./configs/btc_config.json

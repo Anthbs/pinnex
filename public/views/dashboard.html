@@ -1,0 +1,30 @@
+<section>
+	<h2>
+		Pinnex
+	</h2>
+	<h4>
+	Profit Per Ping: {{(((ctrl.session.config.currencies.sell_at - ctrl.session.config.currencies.buy_at) / ctrl.session.config.currencies.sell_at) * 100).toFixed(2) + "%"}}<br/>
+	Total Buys:&nbsp;&nbsp;{{ctrl.session.total_buys}}<br/>
+	Total Sells:&nbsp;{{ctrl.session.total_sells}}<br/>
+	Current Price: {{ctrl.session.last_price | number : 2}}
+	</h4>
+	<div>
+		<nvd3 options="ctrl.chartOptions" data="ctrl.chartData"></nvd3>
+		
+		<div>
+			<div>
+				<label>Buy At:</label>
+				<span>{{ctrl.session.config.currencies.buy_at}}</span>
+				<button ng-click="ctrl.setBuy(ctrl.session.config.currencies.buy_at + 0.1)">+</button>
+				<button ng-click="ctrl.setBuy(ctrl.session.config.currencies.buy_at - 0.1)">-</button>
+			</div>
+			<div>
+				<label>Sell At:</label>
+				<span>{{ctrl.session.config.currencies.sell_at}}</span>
+				<button ng-click="ctrl.setSell(ctrl.session.config.currencies.sell_at + 0.1)">+</button>
+				<button ng-click="ctrl.setSell(ctrl.session.config.currencies.sell_at - 0.1)">-</button>
+			</div>
+		</div>
+		
+	</div>
+</section>

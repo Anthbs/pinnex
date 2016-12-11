@@ -11,6 +11,8 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.6.5",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "poloniex.js": "0.0.7"
   }
 }
