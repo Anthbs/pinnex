@@ -222,6 +222,6 @@ getCurrentPrice(function() {
 		tick();
 		setInterval(function() {
 			tick();
-		}, 5000);
+		}, 30000);
 	});
 });
